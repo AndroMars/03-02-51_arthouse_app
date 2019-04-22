@@ -1,8 +1,29 @@
-<template></template>
+<template>
+  <ul id="navigation">
+    <li v-for="item in $store.getters.WORKS" :key="item.id">
+      <a href="#" v-on:click="selectWork(item.id)">{{ item.title }}</a>
+    </li>
+  </ul>
+</template>
 
-<script>
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+
+@Component
+export default class Navigation extends Vue {
+  selectWork(id: number) {
+    this.$store.dispatch("selectWork", id);
+  }
+}
 </script>
 
-<style>
+<style scoped lang="scss">
+#navigation {
+  list-style: none;
+  background-color: yellow;
+  width: 150px;
+  font-size: 0.75rem;
+  text-align: right;
+}
 </style>
 
