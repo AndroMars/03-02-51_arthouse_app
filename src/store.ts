@@ -8,12 +8,16 @@ Vue.use(VueAxios, axios);
 
 const api = 'https://firestore.googleapis.com/v1/';
 const project = 'projects/arthouse-d425b/databases/(default)';
-const document = '/documents/site/2DBoHv40WhRzbTokIFRT';
+const document = '/documents/fl_content/afDBVUOnEyzpWONyi5kV';
 const firestoreURL = api + project + document;
 
 export default new Vuex.Store({
   state: {
-    result: {},
+    result: {
+      title: '',
+      text: '',
+      image: '',
+    },
     navigation: {
       selectedWork: 100,
     },
@@ -80,7 +84,10 @@ export default new Vuex.Store({
       state.navigation.selectedWork = id;
     },
     SET_RESULT(state, result) {
-      state.result = result;
+      // console.log(result);
+      state.result.title = result.fields.field_1555956826297.stringValue;
+      state.result.text = result.fields.field_1555956947167.stringValue;
+      state.result.image = result.fields.field_1555956936116.arrayValue[0].referenceValue;
     },
   },
   actions: {

@@ -1,7 +1,9 @@
 <template>
   <div class="center">
     <div class="content">
-      <p>Result {{ $store.state.result }}</p>
+      <p>Titel {{ $store.state.result.title }}</p>
+      <p>Text {{ $store.state.result.text }}</p>
+      <p>Image {{ $store.state.result.image }}</p>
       <p>Selected Work {{ $store.state.navigation.selectedWork }}</p>
       <div id="nav">
         <router-link to="/">Home</router-link>|
