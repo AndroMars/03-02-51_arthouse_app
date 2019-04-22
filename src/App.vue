@@ -6,17 +6,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Left from "@/components/Left.vue";
-import Center from "@/components/Center.vue";
+import { Component, Vue } from 'vue-property-decorator';
+import Left from '@/components/Left.vue';
+import Center from '@/components/Center.vue';
 
 @Component({
   components: {
     Left,
-    Center
-  }
+    Center,
+  },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  public mounted() {
+    this.$store.dispatch('requestData');
+  }
+}
 </script>
 
 <style lang="scss">

@@ -1,10 +1,19 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
 Vue.use(Vuex);
+Vue.use(VueAxios, axios);
+
+const api = 'https://firestore.googleapis.com/v1/';
+const project = 'projects/arthouse-d425b/databases/(default)';
+const document = '/documents/site/2DBoHv40WhRzbTokIFRT';
+const firestoreURL = api + project + document;
 
 export default new Vuex.Store({
   state: {
+    result: {},
     navigation: {
       selectedWork: 100,
     },
@@ -14,22 +23,22 @@ export default new Vuex.Store({
         order: 0,
         title: 'Work 1',
         navigation_title: 'Work 1 Full Name',
-        content: 'Test Content Work 1'
+        content: 'Test Content Work 1',
       },
       {
         id: 1,
         order: 1,
         title: 'Work 2',
         navigation_title: 'Work 2 Full Name',
-        content: 'Test Content Work 2'
+        content: 'Test Content Work 2',
       },
       {
         id: 2,
         order: 3,
         title: 'Work 3',
         navigation_title: 'Work 3 Full Name',
-        content: 'Test Content Work 3'
-      }
+        content: 'Test Content Work 3',
+      },
     ],
     sites: [
       {
@@ -37,48 +46,59 @@ export default new Vuex.Store({
         order: 0,
         title: 'Home',
         navigation_title: 'home',
-        content: 'About Content'
+        content: 'About Content',
       },
       {
         id: 5,
         order: 0,
         title: 'Contact',
         navigation_title: 'contact',
-        content: 'Contact Content'
+        content: 'Contact Content',
       },
       {
         id: 7,
         order: 0,
         title: 'About',
         navigation_title: 'about',
-        content: 'About Content'
+        content: 'About Content',
       },
       {
         id: 6,
         order: 0,
         title: 'Newsletter',
         navigation_title: 'newsletter',
-        content: 'Newsletter Content'
-      }
+        content: 'Newsletter Content',
+      },
     ],
     site: {
       title: 'My Work',
       active: true,
-    }
+    },
   },
   mutations: {
     selectWork(state, id) {
       state.navigation.selectedWork = id;
-    }
+    },
+    SET_RESULT(state, result) {
+      state.result = result;
+    },
   },
   actions: {
+    requestData({ commit }) {
+      axios
+        .get(firestoreURL)
+        .then((r) => r.data)
+        .then((result) => {
+          commit('SET_RESULT', result);
+        });
+    },
     selectWork(context, id) {
       context.commit('selectWork', id);
-    }
+    },
   },
   getters: {
-    WORKS: state => {
-      return state.works
-    }
-  }
+    WORKS: (state) => {
+      return state.works;
+    },
+  },
 });

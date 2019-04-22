@@ -1,6 +1,7 @@
 <template>
   <div class="center">
     <div class="content">
+      <p>Result {{ $store.state.result }}</p>
       <p>Selected Work {{ $store.state.navigation.selectedWork }}</p>
       <div id="nav">
         <router-link to="/">Home</router-link>|
@@ -12,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 
 export default class Left extends Vue {}
 </script>
