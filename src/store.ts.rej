@@ -1,0 +1,4 @@
+diff a/src/store.ts b/src/store.ts	(rejected hunks)
+@@ -12 +12 @@ const document = '/documents/site/2DBoHv40WhRzbTokIFRT';
+-const firestoreURL = api + project + document
++const firestoreURL = api + project + document;
