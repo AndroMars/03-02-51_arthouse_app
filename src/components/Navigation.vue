@@ -7,12 +7,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Navigation extends Vue {
-  selectWork(id: number) {
-    this.$store.dispatch("selectWork", id);
+  public selectWork(id: number) {
+    // this.$store.dispatch("selectWork", id);
+    this.$store.dispatch('requestData');
   }
 }
 </script>

@@ -83,20 +83,20 @@ export default new Vuex.Store({
     selectWork(state, id) {
       state.navigation.selectedWork = id;
     },
-    SET_RESULT(state, result) {
+    setResult(state, result) {
       // console.log(result);
       state.result.title = result.fields.field_1555956826297.stringValue;
       state.result.text = result.fields.field_1555956947167.stringValue;
-      state.result.image = result.fields.field_1555956936116.arrayValue[0].referenceValue;
+      // state.result.image = result.fields.field_1555956936116.arrayValue[0].referenceValue;
     },
   },
   actions: {
-    requestData({ commit }) {
+    requestData(context, id) {
       axios
         .get(firestoreURL)
         .then((r) => r.data)
         .then((result) => {
-          commit('SET_RESULT', result);
+          context.commit('setResult', result);
         });
     },
     selectWork(context, id) {
