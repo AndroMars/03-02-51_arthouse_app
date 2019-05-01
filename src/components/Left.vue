@@ -16,7 +16,7 @@ import Navigation from '@/components/Navigation.vue';
 export default class Left extends Vue {
   public mounted() {
     // console.log(this.$store.state.documents);
-    this.$store.dispatch('requestData');
+    // this.$store.dispatch('requestData');
   }
 }
 </script>
@@ -25,6 +25,7 @@ export default class Left extends Vue {
 #left {
   width: 350px;
   padding-top: 100px;
-  background-color: red;
+  border-color: red;
+  border-style: solid;
 }
 </style>

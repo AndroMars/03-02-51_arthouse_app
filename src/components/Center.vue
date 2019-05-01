@@ -1,15 +1,12 @@
 <template>
   <div class="center">
     <div class="content">
-      <!-- <p>Titel {{ $store.state.result.title }}</p>
-      <p>Text {{ $store.state.result.text }}</p>
-      <p>Image {{ $store.state.result.image }}</p> -->
-      <p>Selected Work {{ $store.state.navigation.selectedWork }}</p>
-      <div id="nav">
+      <ArtWork />
+      <!--<div id="nav">
         <router-link to="/">Home</router-link>|
         <router-link to="/about">About</router-link>
         <router-view/>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
@@ -17,6 +14,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
+import ArtWork from '@/template/ArtWork.vue';
+
+@Component({
+  components: {
+    ArtWork,
+  },
+})
 export default class Left extends Vue {
 
 }
@@ -33,7 +37,8 @@ export default class Left extends Vue {
 .content {
   display: flex;
   width: 500px;
-  background-color: blue;
+  border-color: blue;
+  border-style: solid;
   flex-direction: column;
 }
 

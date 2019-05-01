@@ -1,6 +1,6 @@
 <template>
   <ul id="navigation">
-    <li v-for="item in $store.getters.WORKS" :key="item.id">
+    <li v-for="item in $store.getters.DOCUMENTS" :key="item.id">
       <a href="#" v-on:click="selectWork(item.id)">{{ item.title }}</a>
     </li>
   </ul>
@@ -12,8 +12,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 @Component
 export default class Navigation extends Vue {
   public selectWork(id: number) {
-    // this.$store.dispatch("selectWork", id);
-    this.$store.dispatch('requestData');
+    this.$store.dispatch('selectWork', id);
+    // this.$store.dispatch('requestData');
   }
 }
 </script>
@@ -21,7 +21,8 @@ export default class Navigation extends Vue {
 <style scoped lang="scss">
 #navigation {
   list-style: none;
-  background-color: yellow;
+  border-color: yellow;
+  border-style: solid;
   width: 150px;
   font-size: 0.75rem;
   text-align: right;
