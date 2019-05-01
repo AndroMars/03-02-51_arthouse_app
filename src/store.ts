@@ -6,18 +6,22 @@ import VueAxios from 'vue-axios';
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
+class ArtWork {
+  public title: string;
+
+  constructor(title: string) {
+    this.title = title;
+  }
+}
+
 const api = 'https://firestore.googleapis.com/v1/';
 const project = 'projects/arthouse-d425b/databases/(default)';
-const document = '/documents/fl_content/afDBVUOnEyzpWONyi5kV';
+const document = '/documents/fl_content/';
 const firestoreURL = api + project + document;
 
 export default new Vuex.Store({
   state: {
-    result: {
-      title: '',
-      text: '',
-      image: '',
-    },
+    documents: [],
     navigation: {
       selectedWork: 100,
     },
@@ -84,14 +88,11 @@ export default new Vuex.Store({
       state.navigation.selectedWork = id;
     },
     setResult(state, result) {
-      // console.log(result);
-      state.result.title = result.fields.field_1555956826297.stringValue;
-      state.result.text = result.fields.field_1555956947167.stringValue;
-      // state.result.image = result.fields.field_1555956936116.arrayValue[0].referenceValue;
+      state.documents = result.documents;
     },
   },
   actions: {
-    requestData(context, id) {
+    requestData(context) {
       axios
         .get(firestoreURL)
         .then((r) => r.data)

@@ -5,15 +5,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Navigation from "@/components/Navigation.vue";
+import { Component, Vue } from 'vue-property-decorator';
+import Navigation from '@/components/Navigation.vue';
 
 @Component({
   components: {
-    Navigation
-  }
+    Navigation,
+  },
 })
-export default class Left extends Vue {}
+export default class Left extends Vue {
+  public mounted() {
+    // console.log(this.$store.state.documents);
+    this.$store.dispatch('requestData');
+  }
+}
 </script>
 
 <style lang="scss">

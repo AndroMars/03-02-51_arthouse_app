@@ -18,7 +18,7 @@ import Center from '@/components/Center.vue';
 })
 export default class App extends Vue {
   public mounted() {
-    // this.$store.dispatch('requestData', 15);
+    this.$store.dispatch('requestData');
   }
 }
 </script>
