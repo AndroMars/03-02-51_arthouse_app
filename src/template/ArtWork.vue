@@ -14,7 +14,8 @@
 
     <div>
         <li v-for="item in $store.getters.SELECTEDDOCUMENT.imagesbottom" :key="item">
-            <!--<a>{{ $store.getters.getFiles[item.name] }}</a>-->
+            <a>{{ $store.getters.getFileURL(item) }}</a>
+            <!-- {{ item }} -->
         </li>
         
     </div>
@@ -39,5 +40,10 @@ export default {
 
 
 <style>
+
+main {
+
+  min-height: 100%;  
+}
 
 </style>

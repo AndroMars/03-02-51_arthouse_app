@@ -20,7 +20,7 @@ class File {
     this.name = name;
     this.file = file;
 
-    this.url = baseURL + file;
+    this.url = baseURL + file + '?alt=media';
   }
 }
 
@@ -111,13 +111,13 @@ export default new Vuex.Store({
         );
 
         let imagesTop: any[] = [];
-        _.forEach(_.get(item, 'fields.imagesTop.arrayValue.values', []), (image) => {
+        _.forEach(_.get(item, 'fields.imagesTop.arrayValue.values', []), (image: any) => {
           const referenceValue = _.get(image, 'referenceValue');
           imagesTop.push(referenceValue);
         });
 
         let imagesBottom: any[] = [];
-        _.forEach(_.get(item, 'fields.imagesBottom.arrayValue.values', []), (image) => {
+        _.forEach(_.get(item, 'fields.imagesBottom.arrayValue.values', []), (image: any) => {
           const referenceValue = _.get(image, 'referenceValue');
           imagesBottom.push(referenceValue);
         });
@@ -180,9 +180,7 @@ export default new Vuex.Store({
     DOCUMENTS: (state) => {
       return state.documents;
     },
-    getFiles: (state) => {
-      return state.files;
-    },
+    getFileURL: (state) => (name: string) => _.get(state.files,[name, 'url']),
     SELECTEDDOCUMENT: (state) => {
       if (!state.selected || state.selected === '0') {
         return new ArtWork('0', '', '', '', '', '');

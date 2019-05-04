@@ -40,6 +40,7 @@ export default class Left extends Vue {
   border-color: blue;
   border-style: solid;
   flex-direction: column;
+  min-height: 95vh;
 }
 
 #nav {
