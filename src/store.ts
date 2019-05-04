@@ -1,4 +1,3 @@
-/*
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
@@ -30,9 +29,9 @@ class ArtWork {
   public title: string;
   public subtitle: string;
   public texttop: string;
-  public imagestop: [];
+  public imagestop: any[];
   public textcenter: string;
-  public imagesbottom: [];
+  public imagesbottom: any[];
   public textbottom: string;
 
   constructor(id: string, title: string, subtitle: string, texttop: string, textcenter: string, textbottom: string) {
@@ -42,6 +41,8 @@ class ArtWork {
     this.texttop = texttop;
     this.textcenter = textcenter;
     this.textbottom = textbottom;
+    this.imagestop = [];
+    this.imagesbottom = [];
   }
 }
 
@@ -99,7 +100,7 @@ export default new Vuex.Store({
     setData(state, result) {
       const documents = {};
 
-/*      _.forEach(result.documents, (item: any) => {
+      _.forEach(result.documents, (item: any) => {
         const document = new ArtWork(
           _.get(item, 'fields.id.stringValue', '0'),
           _.get(item, 'fields.title.stringValue', ''),
@@ -109,13 +110,13 @@ export default new Vuex.Store({
           _.get(item, 'fields.textBottom.stringValue', ''),
         );
 
-        const imagesTop = [];
+        let imagesTop: any[] = [];
         _.forEach(_.get(item, 'fields.imagesTop.arrayValue.values', []), (image) => {
           const referenceValue = _.get(image, 'referenceValue');
           imagesTop.push(referenceValue);
         });
 
-        const imagesBottom = [];
+        let imagesBottom: any[] = [];
         _.forEach(_.get(item, 'fields.imagesBottom.arrayValue.values', []), (image) => {
           const referenceValue = _.get(image, 'referenceValue');
           imagesBottom.push(referenceValue);
@@ -131,11 +132,11 @@ export default new Vuex.Store({
     },
     setFiles(state, result) {
    //   console.log("mtart utation");
-   //   let files = {};
+      let files = {};
 
       // console.log("result", result);
 
-      /**
+      
       _.forEach(result.documents, (item:any) => {
         let name = _.get(item, 'name', '');
 
@@ -146,7 +147,7 @@ export default new Vuex.Store({
 
         _.set(files, name, file);
 
-        console.log(file);
+        // console.log(file);
       });
 
       _.set(state, 'files', files);
@@ -167,7 +168,7 @@ export default new Vuex.Store({
         .get(firestoreURL + 'fl_files/')
         .then((r) => r.data)
         .then((result) => {
-          console.log(result);
+          // console.log(result);
           context.commit('setFiles', result);
         });
     },
