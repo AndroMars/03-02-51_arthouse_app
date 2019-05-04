@@ -1,53 +1,62 @@
+/*
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import _ from 'lodash';
 
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
-class ArtWork {
-  public title: string;
+class File {
+  public name: string;
+  public file: string;
 
-  constructor(title: string) {
+  public url: string;
+//  public url_sized: string;
+
+  constructor(name: string, file: string) {
+    const baseURL = 'https://firebasestorage.googleapis.com/v0/b/arthouse-d425b.appspot.com/o/flamelink%2Fmedia%2';
+
+    this.name = name;
+    this.file = file;
+
+    this.url = baseURL + file;
+  }
+}
+
+class ArtWork {
+  public id: string;
+  public title: string;
+  public subtitle: string;
+  public texttop: string;
+  public imagestop: [];
+  public textcenter: string;
+  public imagesbottom: [];
+  public textbottom: string;
+
+  constructor(id: string, title: string, subtitle: string, texttop: string, textcenter: string, textbottom: string) {
+    this.id = id;
     this.title = title;
+    this.subtitle = subtitle;
+    this.texttop = texttop;
+    this.textcenter = textcenter;
+    this.textbottom = textbottom;
   }
 }
 
 const api = 'https://firestore.googleapis.com/v1/';
 const project = 'projects/arthouse-d425b/databases/(default)';
-const document = '/documents/fl_content/';
+const document = '/documents/';
 const firestoreURL = api + project + document;
 
 export default new Vuex.Store({
   state: {
-    documents: [],
-    navigation: {
-      selectedWork: 100,
-    },
-    works: [
-      {
-        id: 0,
-        order: 0,
-        title: 'Work 1',
-        navigation_title: 'Work 1 Full Name',
-        content: 'Test Content Work 1',
-      },
-      {
-        id: 1,
-        order: 1,
-        title: 'Work 2',
-        navigation_title: 'Work 2 Full Name',
-        content: 'Test Content Work 2',
-      },
-      {
-        id: 2,
-        order: 3,
-        title: 'Work 3',
-        navigation_title: 'Work 3 Full Name',
-        content: 'Test Content Work 3',
-      },
-    ],
+    documents: {},
+    selected: '',
+    files: {},
+
+    works: [],
     sites: [
       {
         id: 4,
@@ -85,19 +94,81 @@ export default new Vuex.Store({
   },
   mutations: {
     selectWork(state, id) {
-      state.navigation.selectedWork = id;
+      state.selected = id;
     },
-    setResult(state, result) {
-      state.documents = result.documents;
+    setData(state, result) {
+      const documents = {};
+
+/*      _.forEach(result.documents, (item: any) => {
+        const document = new ArtWork(
+          _.get(item, 'fields.id.stringValue', '0'),
+          _.get(item, 'fields.title.stringValue', ''),
+          _.get(item, 'fields.subtitle.stringValue', ''),
+          _.get(item, 'fields.textTop.stringValue', ''),
+          _.get(item, 'fields.textCenter.stringValue', ''),
+          _.get(item, 'fields.textBottom.stringValue', ''),
+        );
+
+        const imagesTop = [];
+        _.forEach(_.get(item, 'fields.imagesTop.arrayValue.values', []), (image) => {
+          const referenceValue = _.get(image, 'referenceValue');
+          imagesTop.push(referenceValue);
+        });
+
+        const imagesBottom = [];
+        _.forEach(_.get(item, 'fields.imagesBottom.arrayValue.values', []), (image) => {
+          const referenceValue = _.get(image, 'referenceValue');
+          imagesBottom.push(referenceValue);
+        });
+
+        document.imagestop = imagesTop;
+        document.imagesbottom = imagesBottom;
+
+        _.set(documents, document.id, document);
+      });
+
+      _.set(state, 'documents', documents);
+    },
+    setFiles(state, result) {
+   //   console.log("mtart utation");
+   //   let files = {};
+
+      // console.log("result", result);
+
+      /**
+      _.forEach(result.documents, (item:any) => {
+        let name = _.get(item, 'name', '');
+
+        let file = new File(
+          name,
+          _.get(item, 'fields.file.stringValue', ''),
+        );
+
+        _.set(files, name, file);
+
+        console.log(file);
+      });
+
+      _.set(state, 'files', files);
+
     },
   },
   actions: {
     requestData(context) {
       axios
-        .get(firestoreURL)
+        .get(firestoreURL + 'fl_content/')
         .then((r) => r.data)
         .then((result) => {
-          context.commit('setResult', result);
+          context.commit('setData', result);
+        });
+    },
+    requestFiles(context) {
+      axios
+        .get(firestoreURL + 'fl_files/')
+        .then((r) => r.data)
+        .then((result) => {
+          console.log(result);
+          context.commit('setFiles', result);
         });
     },
     selectWork(context, id) {
@@ -105,8 +176,17 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    WORKS: (state) => {
-      return state.works;
+    DOCUMENTS: (state) => {
+      return state.documents;
+    },
+    getFiles: (state) => {
+      return state.files;
+    },
+    SELECTEDDOCUMENT: (state) => {
+      if (!state.selected || state.selected === '0') {
+        return new ArtWork('0', '', '', '', '', '');
+      }
+      return _.get(state.documents, state.selected);
     },
   },
 });
