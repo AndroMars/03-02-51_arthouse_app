@@ -1,23 +1,24 @@
 <template>
-  <div id="image">
-
-
-
-
+  <div class="image2">
+    <img :src="url" />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-
+export default {
+    name: 'ImageComponent',
+    props: {
+      url: String,
+    } 
+}
 </script>
 
 <style lang="scss">
 
-#image {
-
-width: 500 px;
-
+.image2 img {
+  width: 500px;
+  background-color: red;
+  margin-top: 2rem;
 }
 
 </style>

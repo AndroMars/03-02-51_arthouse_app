@@ -18,8 +18,8 @@ import Center from '@/components/Center.vue';
 })
 export default class App extends Vue {
   public mounted() {
-    this.$store.dispatch('requestData');
-    this.$store.dispatch('requestFiles');
+    /* this.$store.dispatch('requestData');
+    this.$store.dispatch('requestFiles'); */
   }
 }
 </script>

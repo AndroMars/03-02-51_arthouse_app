@@ -13,15 +13,10 @@
     </section>
 
     <div>
-        <li v-for="item in $store.getters.SELECTEDDOCUMENT.imagesbottom" :key="item">
-            <a>{{ $store.getters.getFileURL(item) }}</a>
-            <!-- {{ item }} -->
+        <li v-for="item in $store.getters.SELECTEDDOCUMENT.imagestop" :key="item">
+            <ImageComponent :url="$store.getters.getFileURL(item)" />
         </li>
-        
     </div>
-
-
-
 </main> 
 </template>
 
@@ -29,17 +24,21 @@
 import _ from 'lodash';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import ImageComponent from '../components/Image';
 
 export default {
     name: 'ArtWork',
+    components: {
+        ImageComponent
+    },    
     data() {
         return {
             key: 0,
         }
     },
     mounted() {
-        var ref = firebase.firestore().ref('/fl_content');
-        console.log(ref);
+        // var ref = firebase.firestore().ref('/fl_content');
+        // console.log(ref);
     }
 }
 </script>
@@ -47,6 +46,10 @@ export default {
 
 <style>
 
+li {
+
+    list-style: none;
+}
 main {
 
   min-height: 100%;  
