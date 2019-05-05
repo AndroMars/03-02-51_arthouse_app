@@ -47,7 +47,7 @@ export default {
 <style>
 
 li {
-
+    
     list-style: none;
 }
 main {

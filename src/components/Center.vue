@@ -36,7 +36,8 @@ export default class Left extends Vue {
 
 .content {
   display: flex;
-  width: 500px;
+  max-width: 500px;
+  width: 80%;
   border-color: blue;
   border-style: solid;
   flex-direction: column;

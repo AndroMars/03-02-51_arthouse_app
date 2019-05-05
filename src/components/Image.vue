@@ -16,7 +16,8 @@ export default {
 <style lang="scss">
 
 .image2 img {
-  width: 500px;
+  width: 80%;
+  max-width: 500px;
   background-color: red;
   margin-top: 2rem;
 }

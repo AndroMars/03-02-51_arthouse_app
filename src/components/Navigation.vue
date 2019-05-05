@@ -21,11 +21,23 @@ export default class Navigation extends Vue {
 <style scoped lang="scss">
 #navigation {
   list-style: none;
+  border-color: pink;
+  border-style: solid;
+  width: 20%;
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+@media (min-device-width: 750px) { 
+#left {
+  list-style: none;
   border-color: yellow;
   border-style: solid;
   width: 150px;
   font-size: 0.75rem;
   text-align: right;
 }
+}
+
 </style>
 

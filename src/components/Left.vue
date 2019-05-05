@@ -22,10 +22,21 @@ export default class Left extends Vue {
 </script>
 
 <style lang="scss">
+
+
+#left {
+
+  width: 20%; 
+  border-color: green;
+  border-style: solid;
+}
+
+@media (min-device-width: 750px) { 
 #left {
   width: 350px;
   padding-top: 100px;
   border-color: red;
   border-style: solid;
+}
 }
 </style>
