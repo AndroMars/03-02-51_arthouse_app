@@ -27,6 +27,8 @@
 
 <script>
 import _ from 'lodash';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 export default {
     name: 'ArtWork',
@@ -34,6 +36,10 @@ export default {
         return {
             key: 0,
         }
+    },
+    mounted() {
+        var ref = firebase.firestore().ref('/fl_content');
+        console.log(ref);
     }
 }
 </script>
