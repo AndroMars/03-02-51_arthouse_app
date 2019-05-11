@@ -1,5 +1,14 @@
 {
   "projects": {
-    "default": "arthouse-d425b"
+    "default": "mediathek-7f332"
+  },
+  "targets": {
+    "mediathek-7f332": {
+      "hosting": {
+        "arthouse": [
+          "arthouse"
+        ]
+      }
+    }
   }
 }
